@@ -1,12 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import cls from "../libs/cls";
 import { motion, Variants } from "framer-motion";
+import About from "./About";
+import Portfolio from "./Portfolio";
+import Skill from "./Skill";
+import Contact from "./Contact";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-const navItem = ["About", "portfolio", "skill", "contact"];
+const navItem = ["about", "portfolio", "skill", "contact"];
 const navVariant: Variants = {
   initial: {
     scaleY: 0,
@@ -22,6 +26,31 @@ const navVariant: Variants = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [windowSize, setWindowSize] = useState(0);
   const [active, setActive] = useState(false);
+  const aboutRef = useRef<HTMLElement>(null);
+  const portfolioRef = useRef<HTMLElement>(null);
+  const skillRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+
+  const onScroll = (item: string) => {
+    switch (item) {
+      case "about":
+        aboutRef.current?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "contact":
+        contactRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+        break;
+      case "portfolio":
+        portfolioRef.current?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "skill":
+        skillRef.current?.scrollIntoView({ behavior: "smooth" });
+        break;
+    }
+    setActive(false);
+  };
 
   const onActiveNav = () => setActive((prev) => !prev);
 
@@ -43,9 +72,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const smallWindow = windowSize < 768;
 
   return (
-    <section>
+    <section className="-z-10">
       <nav
-        className={cls("fixed w-full bg-gray-900 flex justify-end px-2 py-2")}
+        className={cls(
+          "fixed w-full bg-gray-900 flex justify-end px-2 py-2 z-50"
+        )}
       >
         <div
           className={cls(
@@ -77,7 +108,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ) : (
             navItem.map((item, i) => (
               <span
-                className="p-2 cursor-pointer text-gray-400 hover:text-white transition"
+                onClick={() => onScroll(item)}
+                className="p-2 cursor-pointer text-gray-400 hover:text-yellow-500 transition"
                 key={i}
               >
                 {item}
@@ -98,7 +130,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           >
             {navItem.map((item, i) => (
               <div className="flex justify-center" key={i}>
-                <span className="text-gray-400 hover:text-white transition uppercase cursor-pointer">
+                <span
+                  onClick={() => onScroll(item)}
+                  className="text-gray-400 hover:text-yellow-500 transition uppercase cursor-pointer"
+                >
                   {item}
                 </span>
               </div>
@@ -106,7 +141,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </motion.div>
         )}
       </nav>
-      <main className="max-w-2xl m-auto">{children}</main>
+      <main className={cls("m-auto")} onClick={() => setActive(false)}>
+        <section ref={aboutRef}>
+          <About />
+        </section>
+        <section ref={portfolioRef}>
+          <Portfolio />
+        </section>
+        <section ref={skillRef}>
+          <Skill />
+        </section>
+        <section ref={contactRef}>
+          <Contact />
+        </section>
+        {children}
+      </main>
       <footer></footer>
     </section>
   );
