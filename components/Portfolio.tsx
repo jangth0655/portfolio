@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import SectionTitle from "./SectionTitle";
-import data from "./data";
 import ProjectsImage from "./projectsImage";
 import { AnimatePresence, motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import ItemDetail from "./ItemDetail";
 import cls from "../libs/cls";
+import data from "../data/data";
 
 interface PortfolioProps {}
 
@@ -14,6 +14,7 @@ type Data = {
   id?: number;
   name?: string;
   image?: StaticImageData;
+  detail?: string;
 };
 
 const titles = ["ALL", "Next JS", "GraphQL & Node Js", "React JS"];
@@ -25,6 +26,7 @@ const Portfolio: React.FC<PortfolioProps> = () => {
     id: undefined,
     name: undefined,
     image: undefined,
+    detail: undefined,
   });
   const imageRef = useRef<HTMLDivElement>(null);
   const imageBoxHeight = imageRef.current && imageRef.current?.offsetHeight;
@@ -68,6 +70,7 @@ const Portfolio: React.FC<PortfolioProps> = () => {
       id: data.id,
       name: data.name,
       image: data.image,
+      detail: data.detail,
     }));
   };
 
@@ -95,7 +98,7 @@ const Portfolio: React.FC<PortfolioProps> = () => {
               </motion.div>
               <motion.div
                 layoutId={id + ""}
-                className="w-96 h-96 rounded-md z-50 bg-white absolute left-0 right-0 top-0 bottom-0 m-auto"
+                className="w-96 h-96 rounded-md z-50  absolute left-0 right-0 top-0 bottom-0 m-auto"
               >
                 <ItemDetail {...dataSrc} />
               </motion.div>
