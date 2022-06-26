@@ -1,20 +1,28 @@
-import React, { useRef } from "react";
+import Image from "next/image";
+import React from "react";
 
 interface AboutProps {}
 
 const About: React.FC<AboutProps> = ({}) => {
   return (
-    <section className="bg-gray-900">
-      <main className="min-h-screen pt-24 pb-4 px-2 max-w-5xl m-auto flex ">
-        <div className="w-[60%]  bg-slate-500 border-2">
-          <div></div>
+    <section className="bg-[#0A1011]">
+      <main className="min-h-screen py-28 pb-4 px-2 max-w-5xl m-auto md:flex-row  flex flex-col justify-center items-center md:justify-center">
+        <div className="relative w-[70%] md:h-screen md:mr-5 mr-0 mb-5 h-96">
+          <Image
+            src={`https://imagedelivery.net/h3kJx8b63YkXouCAFpwF5w/31fdd62a-89ad-4029-8a70-3595cc7c1300/public`}
+            layout="fill"
+            objectFit="cover"
+            alt="avatar"
+            className="rounded-lg overflow-hidden "
+          />
         </div>
-        <div className="border-2 w-[40%] flex flex-col justify-center items-center">
-          <h1 className="text-white text-xl font-bold lg:text-3xl">
+
+        <div className="z-30 md:w-[50%] flex flex-col justify-center items-center">
+          <h1 className="text-white text-2xl font-bold lg:text-4xl">
             Jang TaeHee
           </h1>
-          <div className="h-[2px] w-[80%] bg-gray-500 my-3"></div>
-          <div className=" p-2 text-white leading-7 ">
+          <div className="h-[1.5px] w-[90%] bg-gray-400 my-3"></div>
+          <div className="p-2 text-white leading-7 ">
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
               amet provident vero saepe fugiat quaerat fugit, nulla voluptas

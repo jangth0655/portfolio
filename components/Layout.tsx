@@ -75,12 +75,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <section className="-z-10">
       <nav
         className={cls(
-          "fixed w-full bg-gray-900 flex justify-end px-2 py-2 z-50"
+          "fixed w-full bg-[#0A1011] flex justify-end px-6 py-2 z-50"
         )}
       >
         <div
           className={cls(
-            "w-[50%] flex",
+            "w-[100%] flex",
             smallWindow ? "justify-between" : "justify-around uppercase"
           )}
         >
@@ -125,7 +125,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             animate="animate"
             custom={active}
             className={cls(
-              "absolute -z-50 flex h-52 w-full  flex-col justify-evenly bg-gray-800 right-0 top-10 origin-top-right"
+              "absolute -z-50 flex h-52 w-full  flex-col justify-evenly bg-[#0A1011] right-0 top-10 origin-top-right opacity-90"
             )}
           >
             {navItem.map((item, i) => (
