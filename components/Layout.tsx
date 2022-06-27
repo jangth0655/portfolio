@@ -1,6 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import cls from "../libs/cls";
-import { motion, Variants } from "framer-motion";
+import { motion, useViewportScroll, Variants } from "framer-motion";
 import About from "./About";
 import Portfolio from "./Portfolio";
 import Skill from "./Skill";
@@ -23,13 +29,54 @@ const navVariant: Variants = {
   }),
 };
 
+const aboutVar = {
+  initial: {},
+  scroll: {},
+};
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [windowSize, setWindowSize] = useState(0);
   const [active, setActive] = useState(false);
+  const [navActive, setNavActive] =
+    useState<SetStateAction<string | null>>("about");
   const aboutRef = useRef<HTMLElement>(null);
   const portfolioRef = useRef<HTMLElement>(null);
   const skillRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
+  const { scrollY } = useViewportScroll();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.8,
+  };
+
+  const observerFn: IntersectionObserverCallback = (
+    entries: IntersectionObserverEntry[]
+  ) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setNavActive(entry.target.getAttribute("id"));
+      }
+    });
+  };
+
+  useEffect(() => {
+    const targetRef = [
+      aboutRef.current,
+      portfolioRef.current,
+      skillRef.current,
+      contactRef.current,
+    ];
+
+    const observer = new IntersectionObserver(observerFn, options);
+    if (targetRef) targetRef.forEach((ref) => ref && observer.observe(ref));
+
+    return () => {
+      if (targetRef) targetRef.forEach((ref) => ref && observer.unobserve(ref));
+    };
+  }, [options]);
 
   const onScroll = (item: string) => {
     switch (item) {
@@ -75,7 +122,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <section className="-z-10">
       <nav
         className={cls(
-          "fixed w-full bg-[#0A1011] flex justify-end px-6 py-2 z-50"
+          "fixed w-full bg-[#0A1011] flex justify-end px-6 py-4 z-50"
         )}
       >
         <div
@@ -107,13 +154,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </svg>
           ) : (
             navItem.map((item, i) => (
-              <span
-                onClick={() => onScroll(item)}
-                className="p-2 cursor-pointer text-gray-400 hover:text-yellow-500 transition"
-                key={i}
-              >
-                {item}
-              </span>
+              <div className="relative" key={i}>
+                <span
+                  onClick={() => onScroll(item)}
+                  className="p-2 cursor-pointer text-gray-400 hover:text-yellow-500 transition"
+                >
+                  {item}
+                </span>
+                {navActive === item && (
+                  <motion.div
+                    layoutId="circle"
+                    className="absolute w-2 h-2 bg-yellow-300 rounded-full right-0 left-0 -bottom-2 m-auto"
+                  />
+                )}
+              </div>
             ))
           )}
         </div>
@@ -142,16 +196,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         )}
       </nav>
       <main className={cls("m-auto")} onClick={() => setActive(false)}>
-        <section ref={aboutRef}>
+        <section id="about" ref={aboutRef}>
           <About />
         </section>
-        <section ref={portfolioRef}>
+        <section id="portfolio" ref={portfolioRef}>
           <Portfolio />
         </section>
-        <section ref={skillRef}>
+        <section id="skill" ref={skillRef}>
           <Skill />
         </section>
-        <section ref={contactRef}>
+        <section id="contact" ref={contactRef}>
           <Contact />
         </section>
         {children}

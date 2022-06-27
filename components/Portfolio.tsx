@@ -7,8 +7,6 @@ import ItemDetail from "./ItemDetail";
 import cls from "../libs/cls";
 import data from "../data/data";
 
-interface PortfolioProps {}
-
 type Title = "ALL" | "Next JS" | "GraphQL & Node Js" | "React JS";
 type Data = {
   id?: number;
@@ -19,7 +17,7 @@ type Data = {
 
 const titles = ["ALL", "Next JS", "GraphQL & Node Js", "React JS"];
 
-const Portfolio: React.FC<PortfolioProps> = () => {
+const Portfolio: React.FC = () => {
   const [bigProject, setBigProject] = useState(false);
   const [id, setId] = useState<number>();
   const [dataSrc, setDataSrc] = useState<Data>({
@@ -65,13 +63,13 @@ const Portfolio: React.FC<PortfolioProps> = () => {
   const bigImage = (id: number, data: Data) => {
     setId(id);
     setBigProject(true);
-    setDataSrc((prev) => ({
+    setDataSrc({
       ...data,
       id: data.id,
       name: data.name,
       image: data.image,
       detail: data.detail,
-    }));
+    });
   };
 
   return (
@@ -88,7 +86,7 @@ const Portfolio: React.FC<PortfolioProps> = () => {
                 onClick={() => setBigProject(false)}
                 className="flex justify-center items-center bg-black absolute w-full h-full opacity-90 z-20 "
               >
-                <div className="absolute bg-black opacity-50 w-full h-full z-50" />
+                <div className="absolute bg-black opacity-80 w-full h-full z-50" />
                 <Image
                   src={dataSrc.image ? dataSrc.image : ""}
                   layout="fill"
@@ -107,7 +105,7 @@ const Portfolio: React.FC<PortfolioProps> = () => {
         </AnimatePresence>
 
         <main className="min-h-screen px-6 m-auto text-gray-800 max-w-6xl">
-          <SectionTitle title="Projects" content="asdf" />
+          <SectionTitle My={true} title="Projects" content="asdf" />
 
           <div className="flex justify-evenly  m-auto text-lg font-bold mb-14">
             {titles.map((title, i) => (
@@ -128,10 +126,10 @@ const Portfolio: React.FC<PortfolioProps> = () => {
 
           <div
             ref={imageRef}
-            className="md:h-[32rem] h-96 grid md:grid-cols-4  grid-cols-2 gap-2 py-2"
+            className="md:h-[32rem] h-96 grid md:grid-cols-4  grid-cols-2  gap-2 py-2"
           >
-            {data.map((item) => {
-              return item.name === imageTitle ? (
+            {data.map((item) =>
+              item.name === imageTitle ? (
                 <motion.div
                   layoutId={item.id + ""}
                   onClick={() => bigImage(item.id, item)}
@@ -141,17 +139,22 @@ const Portfolio: React.FC<PortfolioProps> = () => {
                 >
                   <ProjectsImage image={item.image} />
                 </motion.div>
-              ) : imageTitle === "ALL" ? (
-                <motion.div
-                  layoutId={item.id + ""}
-                  onClick={() => bigImage(item.id, item)}
-                  key={item.id}
-                  className="relative"
-                >
-                  <ProjectsImage image={item.image} />
-                </motion.div>
-              ) : null;
-            })}
+              ) : null
+            )}
+
+            {data.map(
+              (item) =>
+                imageTitle === "ALL" && (
+                  <motion.div
+                    layoutId={item.id + ""}
+                    onClick={() => bigImage(item.id, item)}
+                    key={item.id}
+                    className="relative"
+                  >
+                    <ProjectsImage image={item.image} />
+                  </motion.div>
+                )
+            )}
           </div>
         </main>
       </section>

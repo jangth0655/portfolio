@@ -8,7 +8,7 @@ interface ProjectsImageProps {
 const ProjectsImage: React.FC<ProjectsImageProps> = ({ image }) => {
   return (
     <>
-      <div className="absolute w-full h-full bg-black opacity-70 z-10 cursor-pointer hover:opacity-5 transition-all rounded-md" />
+      <div className="absolute w-full h-full bg-black opacity-80 z-10 cursor-pointer hover:opacity-5 transition-all rounded-md" />
       <Image
         src={image}
         layout="fill"

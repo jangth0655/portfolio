@@ -26,7 +26,7 @@ const data = [
     name: "GraphQL & Node Js",
     image: image3,
     detail:
-      "GraphQL & Node Js Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, consectetur. Magnam quae illum rem nulla, ducimus quaerat porro quidem cum odit pariatur autem, eum laudantium velit, laborum eveniet iure nobis.",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, consectetur. Magnam quae illum rem nulla, ducimus quaerat porro quidem cum odit pariatur autem, eum laudantium velit, laborum eveniet iure nobis.",
   },
   {
     id: 4,
@@ -54,7 +54,7 @@ const data = [
     name: "Next JS",
     image: image7,
     detail:
-      "Next js Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, consectetur. Magnam quae illum rem nulla, ducimus quaerat porro quidem cum odit pariatur autem, eum laudantium velit, laborum eveniet iure nobis.",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, consectetur. Magnam quae illum rem nulla, ducimus quaerat porro quidem cum odit pariatur autem, eum laudantium velit, laborum eveniet iure nobis.",
   },
 ];
 
