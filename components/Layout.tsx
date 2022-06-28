@@ -173,14 +173,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             animate="animate"
             custom={active}
             className={cls(
-              "absolute -z-50 flex h-52 w-full  flex-col justify-evenly bg-[#181818] right-0 top-10 origin-top-right opacity-90"
+              "absolute -z-50 flex h-52 w-full  flex-col justify-evenly right-0 top-10 origin-top-right "
             )}
           >
+            <div className="w-full h-full  absolute -z-10 bg-[#181818] opacity-90"></div>
             {navItem.map((item, i) => (
               <div className="flex justify-center" key={i}>
                 <span
                   onClick={() => onScroll(item)}
-                  className="text-gray-400 hover:text-[#DE5241] transition uppercase cursor-pointer"
+                  className="text-gray-400 hover:text-[#DE5241] transition uppercase cursor-pointer z-20"
                 >
                   {item}
                 </span>

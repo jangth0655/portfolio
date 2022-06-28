@@ -104,10 +104,10 @@ const Portfolio: React.FC = () => {
           ) : null}
         </AnimatePresence>
 
-        <main className="min-h-screen px-6 m-auto text-white max-w-6xl">
+        <main className="min-h-screen px-6 m-auto text-white max-w-4xl ">
           <SectionTitle My={true} title="Projects" content="asdf" />
 
-          <div className="flex justify-evenly  m-auto text-lg font-bold mb-8">
+          <div className="flex justify-evenly  m-auto text-lg font-bold mb-10">
             {titles.map((title, i) => (
               <span
                 onClick={() => onProject(title)}

@@ -34,7 +34,7 @@ const Contact: React.FC<ContactProps> = ({}) => {
             <Link href={`https://github.com/jangth0655`}>
               <a className="text-white flex flex-col space-x-2 items-center">
                 <svg
-                  className="bg-white w-5 h-5 rounded-md "
+                  className="w-5 h-5 rounded-md bg-white"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
