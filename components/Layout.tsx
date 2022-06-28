@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import cls from "../libs/cls";
-import { motion, useViewportScroll, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import About from "./About";
 import Portfolio from "./Portfolio";
 import Skill from "./Skill";
@@ -29,11 +29,6 @@ const navVariant: Variants = {
   }),
 };
 
-const aboutVar = {
-  initial: {},
-  scroll: {},
-};
-
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [windowSize, setWindowSize] = useState(0);
   const [active, setActive] = useState(false);
@@ -43,7 +38,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const portfolioRef = useRef<HTMLElement>(null);
   const skillRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
-  const { scrollY } = useViewportScroll();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const options = {
@@ -122,7 +116,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <section className="-z-10">
       <nav
         className={cls(
-          "fixed w-full bg-[#0A1011] flex justify-end px-6 py-4 z-50"
+          "fixed w-full bg-[#181818] flex justify-end px-6 py-4 z-50"
         )}
       >
         <div
@@ -157,14 +151,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="relative" key={i}>
                 <span
                   onClick={() => onScroll(item)}
-                  className="p-2 cursor-pointer text-gray-400 hover:text-yellow-500 transition"
+                  className="p-2 cursor-pointer text-gray-400 hover:text-[#DE5241] transition"
                 >
                   {item}
                 </span>
                 {navActive === item && (
                   <motion.div
                     layoutId="circle"
-                    className="absolute w-2 h-2 bg-yellow-300 rounded-full right-0 left-0 -bottom-2 m-auto"
+                    className="absolute w-2 h-2 bg-[#DE5241] rounded-full right-0 left-0 -bottom-2 m-auto"
                   />
                 )}
               </div>
@@ -179,14 +173,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             animate="animate"
             custom={active}
             className={cls(
-              "absolute -z-50 flex h-52 w-full  flex-col justify-evenly bg-[#0A1011] right-0 top-10 origin-top-right opacity-90"
+              "absolute -z-50 flex h-52 w-full  flex-col justify-evenly bg-[#181818] right-0 top-10 origin-top-right opacity-90"
             )}
           >
             {navItem.map((item, i) => (
               <div className="flex justify-center" key={i}>
                 <span
                   onClick={() => onScroll(item)}
-                  className="text-gray-400 hover:text-yellow-500 transition uppercase cursor-pointer"
+                  className="text-gray-400 hover:text-[#DE5241] transition uppercase cursor-pointer"
                 >
                   {item}
                 </span>

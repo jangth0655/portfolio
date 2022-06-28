@@ -74,7 +74,7 @@ const Portfolio: React.FC = () => {
 
   return (
     <>
-      <section className="relative">
+      <section className="relative bg-[#1A1A1A]">
         <AnimatePresence>
           {bigProject ? (
             <motion.div>
@@ -104,17 +104,17 @@ const Portfolio: React.FC = () => {
           ) : null}
         </AnimatePresence>
 
-        <main className="min-h-screen px-6 m-auto text-gray-800 max-w-6xl">
+        <main className="min-h-screen px-6 m-auto text-white max-w-6xl">
           <SectionTitle My={true} title="Projects" content="asdf" />
 
-          <div className="flex justify-evenly  m-auto text-lg font-bold mb-14">
+          <div className="flex justify-evenly  m-auto text-lg font-bold mb-8">
             {titles.map((title, i) => (
               <span
                 onClick={() => onProject(title)}
                 className={cls(
-                  "hover:text-yellow-500 cursor-pointer transition-all px-2 rounded-md",
+                  "hover:text-[#DE5241] cursor-pointer transition-all px-2 rounded-md",
                   imageTitle === title
-                    ? "ring-2 ring-offset-2 ring-yellow-300"
+                    ? "ring-1 ring-offset-1 ring-[#DE5241]"
                     : ""
                 )}
                 key={i}
@@ -126,7 +126,7 @@ const Portfolio: React.FC = () => {
 
           <div
             ref={imageRef}
-            className="md:h-[32rem] h-96 grid md:grid-cols-4  grid-cols-2  gap-2 py-2"
+            className="md:h-[32rem] h-96 pb-6 grid md:grid-cols-4  grid-cols-2  gap-2"
           >
             {data.map((item) =>
               item.name === imageTitle ? (
@@ -137,24 +137,21 @@ const Portfolio: React.FC = () => {
                   key={item.id}
                   className="relative"
                 >
-                  <ProjectsImage image={item.image} />
+                  <ProjectsImage title={item.name} image={item.image} />
                 </motion.div>
               ) : null
             )}
-
-            {data.map(
-              (item) =>
-                imageTitle === "ALL" && (
-                  <motion.div
-                    layoutId={item.id + ""}
-                    onClick={() => bigImage(item.id, item)}
-                    key={item.id}
-                    className="relative"
-                  >
-                    <ProjectsImage image={item.image} />
-                  </motion.div>
-                )
-            )}
+            {imageTitle === "ALL" &&
+              data.map((item) => (
+                <motion.div
+                  layoutId={item.id + ""}
+                  onClick={() => bigImage(item.id, item)}
+                  key={item.id}
+                  className="relative"
+                >
+                  <ProjectsImage title={item.name} image={item.image} />
+                </motion.div>
+              ))}
           </div>
         </main>
       </section>

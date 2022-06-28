@@ -11,15 +11,15 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ content, title, My }) => {
     <div className="py-14">
       <div className="relative lg:flex-row flex flex-col space-x-4 items-center justify-center">
         {My ? (
-          <span className="text-3xl">
+          <span className="text-[#EF5442] text-3xl">
             My <span className="font-bold ">{title}</span>
           </span>
         ) : (
-          <span className="text-4xl font-bold">{title}</span>
+          <span className="text-white text-4xl font-bold">{title}</span>
         )}
 
         <div className="w-[30%] my-2 h-[2px] lg:w-[2px] lg:h-9 bg-yellow-400"></div>
-        <p className="text-lg">{content}</p>
+        <p className="text-lg text-gray-200">{content}</p>
       </div>
     </div>
   );
